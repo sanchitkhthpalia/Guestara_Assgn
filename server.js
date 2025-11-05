@@ -20,6 +20,17 @@ app.use(morgan('dev'));
 app.use(bodyParser.json({ limit: '1mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Root route for convenience on hosted environments
+app.get('/', (req, res) => {
+  return res.status(200).json({
+    name: 'Guestara Menu Backend',
+    status: 'ok',
+    docs: 'See README for API usage',
+    health: '/health',
+    api: '/api',
+  });
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
